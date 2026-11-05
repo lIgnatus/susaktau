@@ -148,7 +148,11 @@ function mediaHtml(m) {
   if (!m) return '';
   if (m.type === 'photo') return `<figure class="ph${m.frame ? ' frame' : ''}"><div class="kb"><img src="${m.src}" alt="${esc(m.cap)}" style="object-position:${m.pos || '50% 50%'}"></div><figcaption>${m.cap}</figcaption></figure>`;
   if (m.type === 'map') return `<figure class="mapc">${mapSvg()}${legendHtml()}<figcaption>Рельеф Mapzen, объекты © OpenStreetMap. Мельница, Туктарово и находка показаны примерно</figcaption></figure>`;
-  if (m.type === 'plants') return `<div class="plants"><h3>Красная книга · растения склонов</h3><ol>${PLANTS.map(([n, l], k) => `<li style="--d:${k}"><b>${n}</b><i>${l}</i></li>`).join('')}</ol><p class="src">Источник: статья «Сусактау», Википедия [2]</p></div>`;
+  if (m.type === 'plants') return `<div class="plants pg"><h3>Красная книга · растения склонов</h3><ol>${PLANTS.map(([n, l, , img, cr], k) => `<li style="--d:${k}">${img ? `<span class="pi kb"><img src="${img}" alt="${esc(n)}"></span>` : '<span class="pi none">снимка вида в открытых источниках нет</span>'}<b>${n}</b><i>${l}</i>${cr ? `<small>фото: ${cr}</small>` : ''}</li>`).join('')}</ol><p class="src">Список видов: статья «Сусактау», Википедия [2]. Фото показывают вид, сняты не на Сусак-тау</p></div>`;
+  if (m.type === 'trip') return `<div class="trip">
+    <figure class="t1" style="--d:0"><div class="kb"><img src="img/liza-vershina.jpg" alt="Елизавета на вершине Сусак-тау" style="object-position:50% 45%"></div><figcaption>На вершине</figcaption></figure>
+    <figure class="t2" style="--d:1"><div class="kb"><img src="img/liza-rebyata.jpg" alt="Елизавета с ребятами на склоне" style="object-position:35% 60%"></div><figcaption>С ребятами на склоне, внизу Дёма</figcaption></figure>
+    <figure class="t3" style="--d:2"><div class="kb"><img src="img/gruppa.jpg" alt="Общее фото на горе" style="object-position:50% 55%"></div><figcaption>Общее фото на горе</figcaption></figure></div>`;
   if (m.type === 'finds') return `<div class="finds">
     <figure class="f1" style="--d:0"><div class="kb"><img src="img/topor.jpg" alt="Бронзовый топор"></div><figcaption>Бронзовый топор</figcaption></figure>
     <figure class="f2" style="--d:1"><div class="kb"><img src="img/serp.jpg" alt="Бронзовый серп"></div><figcaption>Бронзовый серп</figcaption></figure>
@@ -172,7 +176,7 @@ function slideHtml(s, i) {
   if (s.layout === 'title') return `<section class="slide title" data-i="${i}" style="${st}" aria-label="Слайд ${i + 1}">
     <div class="tcard"><p class="kick" style="--d:0">«Отечество» · 2026 · номинация «${M.nomination}»</p>
     <h1 style="--d:1">${M.title}</h1>
-    <div class="who" style="--d:2"><p><b>${M.author}</b>, ${M.grade}</p><p>Руководитель: ${M.supervisor}</p></div></div></section>`;
+    <div class="who" style="--d:2"><p><b>${M.author}</b>, ${M.grade}</p>${M.supervisors.map((x, k) => `<p>${k ? '' : 'Руководители: '}${x}</p>`).join('')}</div></div></section>`;
   if (s.layout === 'final') return `<section class="slide final" data-i="${i}" style="${st}" aria-label="Слайд ${i + 1}">
     <div class="fcard"><p class="kick" style="--d:0"><i></i>${s.kicker}</p><div class="fcols">${s.cols.map(([h, items], k) => `<div style="--d:${k + 1}"><h3>${h}</h3><ul>${items.map(x => `<li>${x}</li>`).join('')}</ul></div>`).join('')}</div></div>
     <p class="thanks" style="--d:3">${s.thanks}</p></section>`;
@@ -190,6 +194,7 @@ function slideHtml(s, i) {
 const host = $('#slides'), tiles = $('#tiles'), bar = $('#bar'), stage = $('#stage');
 host.innerHTML = S.map(slideHtml).join('');
 tiles.innerHTML = S.map((s, i) => `<button class="mc" type="button" data-i="${i}" style="${lyStyle(s.layer)}" title="${i + 1}. ${esc(s.tab)}"><span class="art">${plaqueSvg(i)}</span><span class="tx"><small>${pad(i + 1)}</small><b>${s.tab}</b></span></button>`).join('');
+tiles.style.setProperty('--n', S.length);
 const slides = [...host.children], plaques = [...tiles.children];
 
 /* ---------- фон: ролики с дрона, смена наплывом ---------- */

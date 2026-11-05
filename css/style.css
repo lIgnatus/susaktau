@@ -221,14 +221,14 @@ button{font-family:inherit}
 .btn.start{background:var(--wheat)}
 .btn:focus-visible,.mc:focus-visible{outline:3px solid var(--wheat);outline-offset:2px}
 
-.tiles{display:grid;grid-template-columns:repeat(12,minmax(0,1fr));gap:calc(var(--u)*.45);align-items:end;margin:0 calc(var(--u)*.4)}
+.tiles{display:grid;grid-template-columns:repeat(var(--n,12),minmax(0,1fr));gap:calc(var(--u)*.45);align-items:end;margin:0 calc(var(--u)*.4)}
 .mc{--hatch:#B9BEB6;--outline:#868E85;--cardbg:#FFFFFF;display:grid;align-content:end;padding:0;border:0;background:none;cursor:pointer;color:var(--muted);min-width:0;
   filter:drop-shadow(0 8px 10px rgba(0,0,0,.35));transition:transform .35s var(--ease),--hatch .9s ease,--outline .9s ease,--cardbg .9s ease,color .6s}
 .mc .art{display:block;line-height:0;padding:0 2%}
 .mc .art svg{display:block;width:100%;height:auto}
 .mc .tx{display:grid;background:var(--cardbg);margin-top:-1px;border-radius:0 0 calc(var(--u)*.8) calc(var(--u)*.8);padding:calc(var(--u)*.05) calc(var(--u)*.35) calc(var(--u)*.45);text-align:left}
 .mc small{font-size:calc(var(--u)*.8);font-variant-numeric:tabular-nums;opacity:.8;line-height:1.2}
-.mc b{font-size:calc(var(--u)*.94);line-height:1.15;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.mc b{font-size:calc(var(--u)*.88);line-height:1.15;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .mc:hover{transform:translateY(calc(var(--u)*-.35))}
 .mc.seen{--hatch:var(--lc);--outline:var(--lo);--cardbg:var(--lt);color:var(--ink)}
 .mc.cur{--hatch:var(--lc);--outline:var(--lo);--cardbg:#FFFFFF;color:var(--ink);transform:translateY(calc(var(--u)*-.9))}
@@ -273,4 +273,30 @@ button{font-family:inherit}
   .mc b{font-size:calc(var(--u)*1.3)}
   .mc small{font-size:calc(var(--u)*1.05)}
   .notes{width:92%;font-size:calc(var(--u)*1.6)}
+}
+
+/* растения: плитки с фото вида */
+.plants.pg{height:100%;display:flex;flex-direction:column}
+.plants.pg ol{flex:1;min-height:0;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));grid-template-rows:repeat(2,minmax(0,1fr));gap:calc(var(--u)*.9)}
+.plants.pg li{display:flex;flex-direction:column;align-items:flex-start;text-align:left;border:0;padding:0;min-height:0}
+.plants.pg .pi{align-self:stretch}
+.plants.pg li::before{display:none}
+.plants.pg .pi{position:relative;flex:1;min-height:0;border-radius:calc(var(--u)*.8);overflow:hidden;background:var(--lt);margin-bottom:calc(var(--u)*.4)}
+.plants.pg .pi img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.plants.pg .pi.none{display:grid;place-items:center;text-align:center;padding:calc(var(--u)*1);font-size:calc(var(--u)*1.05);font-style:italic;color:var(--lo);background:repeating-linear-gradient(0deg,var(--lt) 0 6px,#fff 6px 9px)}
+.plants.pg b{font-size:calc(var(--u)*1.45);line-height:1.1}
+.plants.pg i{font-size:calc(var(--u)*1.05)}
+.plants.pg small{font-size:calc(var(--u)*.72);color:var(--muted);line-height:1.2}
+
+/* полевой выход: три фото */
+.trip{width:100%;height:100%;display:grid;grid-template-columns:.62fr 1fr;grid-template-rows:1fr 1fr;gap:calc(var(--u)*1)}
+.trip figure{position:relative;margin:0;border-radius:calc(var(--u)*1.2);overflow:hidden;background:#1d241e;box-shadow:var(--sh)}
+.trip .t1{grid-row:1/3}
+.trip figcaption{position:absolute;left:0;right:0;bottom:0;padding:calc(var(--u)*2.2) calc(var(--u)*1) calc(var(--u)*.6);color:#fff;font-size:calc(var(--u)*1.25);background:linear-gradient(180deg,rgba(0,0,0,0),rgba(0,0,0,.7))}
+.slide.on .trip figure{animation:up .7s var(--ease) both;animation-delay:calc(.3s + var(--d)*.25s)}
+@media (max-aspect-ratio: 1/1){
+  .plants.pg ol{grid-template-columns:repeat(3,minmax(0,1fr))}
+  .plants.pg small{display:none}
+  .eros{display:none}
+  .trip{grid-template-columns:.7fr 1fr}
 }
