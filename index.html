@@ -1,0 +1,52 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Сусак-тау · многослойный памятник</title>
+<meta name="description" content="Презентация к защите работы Елизаветы Сальниковой на конкурсе «Отечество», номинация «Летопись родного края». Руководитель С. В. Попков.">
+<meta name="theme-color" content="#1F2B22">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Гора Сусак-тау как многослойный памятник истории и природы">
+<meta property="og:description" content="Слайд-шоу к защите на конкурсе «Отечество»: видео с дрона и плашки-слайды. Альшеевский район.">
+<meta property="og:image" content="https://lignatus.github.io/susaktau/img/preview.jpg">
+<meta property="og:url" content="https://lignatus.github.io/susaktau/">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Cpath d='M1 29 C8 29 13 20 16 4 C19 20 24 29 31 29 Z' fill='%235B7A34' stroke='%231F2B22' stroke-width='1.5'/%3E%3C/svg%3E">
+<link rel="preload" as="image" href="video/v1.jpg">
+<link rel="stylesheet" href="fonts/fonts.css">
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+<div class="stage" id="stage">
+  <div class="bg" aria-hidden="true">
+    <video id="va" muted playsinline preload="auto" poster="video/v1.jpg"></video>
+    <video id="vb" muted playsinline preload="auto"></video>
+    <div class="scrim"></div>
+  </div>
+
+  <header class="top">
+    <div class="brand">Сусак-тау · многослойный памятник</div>
+    <div class="meta">
+      <span class="chip-layer" id="layerChip"></span>
+      <span class="count" id="count">01 / 12</span>
+      <span class="timer" id="timer" title="Время с нажатия «Старт», регламент 7 минут">0:00</span>
+    </div>
+  </header>
+
+  <main class="slides" id="slides"></main>
+
+  <aside class="notes" id="notes" hidden></aside>
+
+  <nav class="bar" id="bar" aria-label="Слайды">
+    <p class="hint" id="hint">→ вперёд · ← назад · F полный экран · T текст выступления</p>
+    <button class="btn start" id="bStart" type="button"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5v14l11-7z" fill="currentColor"/></svg>Старт</button>
+    <button class="btn" id="bPrev" type="button"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15 5l-7 7 7 7" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></svg>Назад</button>
+    <div class="tiles" id="tiles"></div>
+    <button class="btn" id="bNext" type="button">Вперёд<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 5l7 7-7 7" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+  </nav>
+</div>
+<script src="js/slides.js"></script>
+<script src="js/susak-svg.js"></script>
+<script src="js/app.js"></script>
+</body>
+</html>
